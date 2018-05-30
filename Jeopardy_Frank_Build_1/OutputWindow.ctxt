@@ -1,0 +1,26 @@
+#BlueJ class context
+comment0.params=
+comment0.target=OutputWindow()
+comment0.text=\r\n\ Creates\ an\ output\ window\ that\ can\ be\ manipulated.\r\n
+comment1.params=
+comment1.target=void\ fullscreenFrame()
+comment1.text=\r\n\ Sets\ window\ to\ full\ screen.\r\n
+comment2.params=
+comment2.target=void\ windowFrame()
+comment2.text=\r\n\ Sets\ window\ to\ windowed\ size.\r\n
+comment3.params=
+comment3.target=void\ createFrame()
+comment3.text=\r\n\ Creates\ the\ frame\ of\ the\ output\ window.\r\n
+comment4.params=
+comment4.target=void\ createJeopardyPanel()
+comment4.text=\r\n\ Creates\ the\ jeopardy\ panel.\r\n
+comment5.params=
+comment5.target=void\ createControlPanel()
+comment5.text=\r\n\ Creates\ the\ control\ panel.\r\n
+comment6.params=
+comment6.target=void\ createDecorations()
+comment6.text=\r\n\ Creates\ the\ other\ decorations.\r\n
+comment7.params=
+comment7.target=void\ screenEffect()
+comment7.text=\r\n\ Does\ the\ effects.\r\n
+numComments=8
