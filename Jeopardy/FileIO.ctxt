@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=FileIO
-comment0.text=\r\n\ Write\ a\ description\ of\ class\ FileIO\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment0.text=\r\n\ Write\ a\ description\ of\ class\ FileIO\ here.\r\n\ \r\n\ @author\ William\ Wang\r\n\ @version\ 1.0\ 2018.05.29\r\n\ @version\ 1.1\ 2018.05.30\r\n\ @version\ 1.2\ 2018.05.31\r\n\ @version\ 2.0\ 2018.06.01\r\n\ @version\ 2.1\ 2018.06.02\r\n
 comment1.params=
 comment1.target=FileIO()
 comment1.text=\r\n\ Constructor\ for\ objects\ of\ class\ FileIO\r\n

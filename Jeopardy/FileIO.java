@@ -6,8 +6,12 @@ import java.io.FileReader;
 /**
  * Write a description of class FileIO here.
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author William Wang
+ * @version 1.0 2018.05.29
+ * @version 1.1 2018.05.30
+ * @version 1.2 2018.05.31
+ * @version 2.0 2018.06.01
+ * @version 2.1 2018.06.02
  */
 public class FileIO
 {
