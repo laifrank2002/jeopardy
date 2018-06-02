@@ -1,0 +1,15 @@
+#BlueJ class context
+comment0.target=FileIO
+comment0.text=\r\n\ Write\ a\ description\ of\ class\ FileIO\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment1.params=
+comment1.target=FileIO()
+comment1.text=\r\n\ Constructor\ for\ objects\ of\ class\ FileIO\r\n
+comment2.params=
+comment2.target=void\ getData()
+comment2.text=\r\n\ An\ example\ of\ a\ method\ -\ replace\ this\ comment\ with\ your\ own\r\n\ \r\n\ @param\ \ y\ \ \ a\ sample\ parameter\ for\ a\ method\r\n\ @return\ \ \ \ \ the\ sum\ of\ x\ and\ y\ \r\n
+comment3.params=
+comment3.target=void\ printData()
+comment3.text=\r\n\ An\ example\ of\ a\ method\ -\ replace\ this\ comment\ with\ your\ own\r\n\ \r\n\ @param\ \ y\ \ \ a\ sample\ parameter\ for\ a\ method\r\n\ @return\ \ \ \ \ the\ sum\ of\ x\ and\ y\ \r\n
+comment4.params=categoryNumber\ answerNumber
+comment4.target=java.lang.String\ getInfo(int,\ int)
+numComments=5
