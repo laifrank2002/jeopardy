@@ -1,0 +1,10 @@
+#BlueJ class context
+comment0.target=FontLoader
+comment0.text=\r\n\ A\ font\ object\ that\ loads\ and\ keeps\ a\ font\ for\ later\ use.\r\n\ \r\n\ @author\ Frank\ Lai\r\n\ @version\ 2018-06-01\ 1.00\r\n
+comment1.params=name
+comment1.target=java.awt.Font\ getFont(java.lang.String)
+comment1.text=\r\n\ Loads\ fonts.\r\n\ \r\n\ @param\ name\ the\ name\ of\ the\ file\ of\ the\ font\r\n
+comment2.params=name\ size
+comment2.target=java.awt.Font\ getFont(java.lang.String,\ int)
+comment2.text=\r\n\ Loads\ fonts\ with\ a\ specific\ size.\r\n\ \r\n\ @param\ name\ the\ name\ of\ the\ file\ of\ the\ font\r\n\ @param\ size\ the\ size\ of\ the\ font\r\n
+numComments=3

@@ -1,0 +1,10 @@
+#BlueJ class context
+comment0.target=InitSplashScreen
+comment0.text=\r\n\ A\ nice\ picture\ that\ lures\ players\ in\ before\ the\ game\ is\ loaded.\r\n\r\n\ @author\ Frank\ Lai\r\n\ @version\ 2018-06-02\r\n
+comment1.params=
+comment1.target=InitSplashScreen()
+comment1.text=\r\n\ Creates\ a\ new\ Splash\ screen.\r\n
+comment2.params=
+comment2.target=void\ destroySplashScreen()
+comment2.text=\r\n\ Destroys\ the\ Splash\ screen.\r\n
+numComments=3
