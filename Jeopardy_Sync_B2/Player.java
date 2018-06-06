@@ -1,6 +1,6 @@
 
 /**
- * Write a description of class Player here.
+ * A data representation of a player.
  * 
  * @author William Wang
  * @version 2018-06-06
