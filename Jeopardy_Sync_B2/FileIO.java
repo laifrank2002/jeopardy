@@ -43,8 +43,6 @@ public class FileIO
      */
     public FileIO()
     {
-        // initialise console buffered reader
-        BufferedReader console = new BufferedReader (new InputStreamReader (System.in));
         // read data from files
         getData();
     } // end of constructor FileIO()
