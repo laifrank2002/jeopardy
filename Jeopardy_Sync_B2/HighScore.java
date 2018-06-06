@@ -55,7 +55,7 @@ public class HighScore
 
     public void recordHighScore(String name, int highScore)
     {
-        int counter = 0;
+        boolean isEntered = false;
         try
         {
             outputFile = new PrintWriter (new FileWriter (fileLocation));
@@ -63,25 +63,19 @@ public class HighScore
         catch(IOException exception)
         {
         }
-        do
+        for(int counter = 0; counter < 10; counter++)
         {
-            if(highScore > this.highScore[counter])
+            if(highScore > this.highScore[counter]&&!isEntered)
             {
-
-                System.out.println("output file:");
                 outputFile.println(name + SPLIT_MARKER + highScore);
-                System.out.println("printed");
-                outputFile.close();
-                getData();
-
+                counter = counter - 1;
             }
-            else
+            else if(highScore == this.highScore[counter]&&!isEntered)
             {
-                outputFile.println(this.name[counter] + SPLIT_MARKER + this.highScore[counter]);
-                counter = counter + 1;
             }
+
+            
         }
-        while(counter>9);
     }
 
     /**
@@ -110,8 +104,6 @@ public class HighScore
         while(inputFile == null);
         for(int index = 0; index < NUMBER_OF_HIGHSCORES; index++)
         {
-            do
-            {
                 try
                 {
                     lineOfText = inputFile.readLine();
@@ -120,7 +112,7 @@ public class HighScore
                 {
                     System.out.println(exception);
                 } // end of catch(IOException exception)
-                if(lineOfText != null&&lineOfText.contains(SPLIT_MARKER))
+                if(lineOfText!= null&&lineOfText.contains(SPLIT_MARKER))
                 {
                     // split name from high score
                     String[] solution = new String[2];
@@ -135,12 +127,6 @@ public class HighScore
                     {
                     }
                 } // end of if(lineOfText != null)
-                else
-                {
-                    isExit = true;
-                } // end of else
-            }
-            while(!isExit);
         }
     }
 }

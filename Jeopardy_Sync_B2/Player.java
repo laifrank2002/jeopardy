@@ -1,9 +1,9 @@
 
 /**
- * A data representation of a player.
+ * Write a description of class Player here.
  * 
- * @author William Wang
- * @version 2018-06-06
+ * @author (your name) 
+ * @version (a version number or a date)
  */
 public class Player
 {
