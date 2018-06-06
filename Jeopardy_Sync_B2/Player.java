@@ -2,8 +2,8 @@
 /**
  * Write a description of class Player here.
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author William Wang
+ * @version 2018-06-06
  */
 public class Player
 {
