@@ -1,0 +1,26 @@
+#BlueJ class context
+comment0.params=argument
+comment0.target=void\ main(java.lang.String[])
+comment0.text=\r\n\ Main\ method.\r\n\ \r\n\ @param\ argument\ not\ used\r\n
+comment1.params=
+comment1.target=void\ reloadPlayerData()
+comment1.text=\r\n\ Resets\ all\ jeopardy\ data.\r\n
+comment2.params=category
+comment2.target=void\ loadNewJeopardy(java.io.File)
+comment2.text=\r\n\ Loads\ and\ inits\ a\ new\ Jeopardy\ based\ on\ a\ new\ file.\r\n\ \r\n\ @param\ file\ the\ File\ that\ contains\ the\ Jeopardy\ Data.\r\n
+comment3.params=
+comment3.target=void\ changePlayer()
+comment3.text=\r\n\ Changes\ the\ current\ player.\r\n
+comment4.params=playerIndex
+comment4.target=int\ getScore(int)
+comment4.text=\r\n\ Returns\ the\ score\ of\ a\ player\r\n\ \r\n\ @param\ index\ the\ index\ of\ the\ player\r\n\ @return\ the\ score\ the\ scores\ of\ the\ player\r\n
+comment5.params=score\ playerIndex
+comment5.target=void\ addScore(int,\ int)
+comment5.text=\r\n\ Adds\ scores.\r\n\ \r\n\ @param\ score\ the\ score\ to\ be\ added\r\n\ @param\ player\ the\ lucky\ player\r\n
+comment6.params=score\ playerIndex
+comment6.target=void\ subtractScore(int,\ int)
+comment6.text=\r\n\ Subtracts\ scores.\r\n\ \r\n\ @param\ score\ the\ score\ to\ be\ subtracted\r\n\ @param\ player\ the\ unlucky\ player\r\n
+comment7.params=playerIndex
+comment7.target=java.lang.String\ getPlayerName(int)
+comment7.text=\r\n\ Gets\ the\ name\ of\ the\ player.\r\n\ \r\n\ @param\ index\ the\ index\ of\ the\ player\r\n\ @return\ the\ name\ of\ the\ player\r\n
+numComments=8
