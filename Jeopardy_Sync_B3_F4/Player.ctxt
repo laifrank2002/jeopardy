@@ -1,0 +1,20 @@
+#BlueJ class context
+comment0.params=
+comment0.target=Player()
+comment0.text=\r\n\ Creates\ a\ default\ player.\r\n
+comment1.params=name
+comment1.target=Player(java.lang.String)
+comment1.text=\r\n\ Creates\ a\ player\ with\ a\ name.\r\n\ \r\n\ @param\ name\ the\ name\ of\ the\ player\r\n
+comment2.params=
+comment2.target=int\ returnScore()
+comment2.text=\r\n\ Gets\ the\ score\ of\ the\ player.\r\n\ \r\n\ @return\ the\ score\ of\ the\ player\r\n
+comment3.params=
+comment3.target=java.lang.String\ returnName()
+comment3.text=\r\n\ Gets\ the\ name\ of\ the\ player.\r\n\ \r\n\ @return\ the\ name\ of\ the\ player\r\n
+comment4.params=score
+comment4.target=void\ addScore(int)
+comment4.text=\r\n\ Adds\ a\ score\ to\ the\ player.\r\n\ \r\n\ @param\ score\ the\ amount\ to\ add\ to\r\n
+comment5.params=score
+comment5.target=void\ subtractScore(int)
+comment5.text=\r\n\ Subtracts\ a\ score\ from\ the\ player.\r\n\ \r\n\ @param\ score\ the\ amount\ of\ take\ from\r\n
+numComments=6
