@@ -1,33 +1,50 @@
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.JOptionPane;
+import javax.swing.JDialog;
+import javax.swing.JButton;
+import javax.swing.JRadioButton;
+import javax.swing.ButtonGroup;
+import javax.swing.JLabel;
+import javax.swing.ImageIcon;
+import javax.swing.BoxLayout;
+import javax.swing.Box;
+import javax.swing.BorderFactory;
+import javax.swing.border.Border;
+import javax.swing.JPanel;
+import javax.swing.JFrame;
 
 /**
- * Write a description of class HighScoreDialog here.
+ * Displays the highscore.
  *
- * @author (your name)
- * @version (a version number or a date)
+ * @author Frank Lai
+ * @version 2018-06-08
  */
-public class HighScoreDialog
+public class HighScoreDialog extends JDialog implements ActionListener
 {
-    // instance variables - replace the example below with your own
-    private int x;
-
+    private static final String TITLE = "Highscore";
+    //private static final Dialog.ModalityType modalityType;
+    // Instance.
+    
     /**
-     * Constructor for objects of class HighScoreDialog
+     * Creates a new highscore JDialog.
      */
-    public HighScoreDialog()
+    public HighScoreDialog()//Window owner)
     {
-        // initialise instance variables
-        x = 0;
-    }
-
+        
+        
+    } // end of method HighScoreDialog()
+    
+    public void actionPerformed(ActionEvent event) 
+    {
+        
+    } // end of method actionPerformed(ActionEvent event) 
+    
     /**
-     * An example of a method - replace this comment with your own
-     *
-     * @param  y  a sample parameter for a method
-     * @return    the sum of x and y
+     * Hides the dialog.
      */
-    public int sampleMethod(int y)
+    public void setInvisible()
     {
-        // put your code here
-        return x + y;
-    }
-}
+        setVisible(false);
+    } // end of method hide()
+} // end of class HighScoreDialog

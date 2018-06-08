@@ -1,4 +1,17 @@
+import javax.swing.JOptionPane;
 import javax.swing.JDialog;
+import javax.swing.JButton;
+import javax.swing.JRadioButton;
+import javax.swing.ButtonGroup;
+import javax.swing.JLabel;
+import javax.swing.ImageIcon;
+import javax.swing.BoxLayout;
+import javax.swing.Box;
+import javax.swing.BorderFactory;
+import javax.swing.border.Border;
+import javax.swing.JTabbedPane;
+import javax.swing.JPanel;
+import javax.swing.JFrame;
 /**
  * Write a description of class SettingsDialog here.
  * 
@@ -18,7 +31,9 @@ public class SettingsDialog extends JDialog
         // initialise instance variables
         x = 0;
     }
-
+    
+    
+    
     /**
      * An example of a method - replace this comment with your own
      * 

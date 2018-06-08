@@ -47,7 +47,7 @@ public class OutputWindow
     public static final Font JEOPARDY_FONT = FontLoader.getFont("Fonts\\Jeopardy\\jeopardy.ttf",JEOPARDY_FONT_SIZE);
     public static final Font JEOPARDY_TITLE_FONT = FontLoader.getFont("Fonts\\Jeopardy\\jeopardy.ttf",JEOPARDY_TITLE_FONT_SIZE);
     // Window constants.
-    public static final int WINDOW_WIDTH = 1300;
+    public static final int WINDOW_WIDTH = 1280;
     public static final int WINDOW_HEIGHT = 768;
     public static final String WINDOW_TITLE = "Jeopardy";
     // Answer Panel constants.
@@ -68,7 +68,7 @@ public class OutputWindow
     public static final int CENTER_PANEL_WIDTH = 1000;
     // Control Panel constants.
     public static final int CONTROL_PANEL_BUTTON_WIDTH = 100;
-    public static final int CONTROL_PANEL_BUTTON_HEIGHT = 75;
+    public static final int CONTROL_PANEL_BUTTON_HEIGHT = 50;
     public static final int CONTROL_PANEL_WIDTH = 100;
     public static final int CONTROL_PANEL_HEIGHT = 400;
     public static final Color CONTROL_PANEL_BUTTON_COLOR = Color.BLUE;
@@ -113,7 +113,8 @@ public class OutputWindow
     private JButton controlPanel_settingsButton;
     private JButton controlPanel_switchPlayerButton;
     private JButton controlPanel_finishGameButton;
-
+    private JButton controlPanel_highScoreButton;
+    
     private JPanel jeopardyPanel;
     //private JPanel jeopardyPanel_categoryPanel;
     //private JLabel[] jeopardyPanel_label;
@@ -551,7 +552,21 @@ public class OutputWindow
         controlPanel_switchPlayerButton.setForeground(CONTROL_PANEL_BUTTON_TEXT_COLOR);
         controlPanel_switchPlayerButton.addActionListener(actionListener);
         skeletonPanel.add(controlPanel_switchPlayerButton);
-
+        // Finish Game Button.
+        controlPanel_finishGameButton = new JButton("Finish Game");
+        controlPanel_finishGameButton.setPreferredSize(new Dimension(CONTROL_PANEL_BUTTON_WIDTH, CONTROL_PANEL_BUTTON_HEIGHT));
+        controlPanel_finishGameButton.setBackground(CONTROL_PANEL_BUTTON_COLOR);
+        controlPanel_finishGameButton.setForeground(CONTROL_PANEL_BUTTON_TEXT_COLOR);
+        controlPanel_finishGameButton.addActionListener(actionListener);
+        skeletonPanel.add(controlPanel_finishGameButton);
+        // Highscore Button.
+        controlPanel_highScoreButton = new JButton("Highscore");
+        controlPanel_highScoreButton.setPreferredSize(new Dimension(CONTROL_PANEL_BUTTON_WIDTH, CONTROL_PANEL_BUTTON_HEIGHT));
+        controlPanel_highScoreButton.setBackground(CONTROL_PANEL_BUTTON_COLOR);
+        controlPanel_highScoreButton.setForeground(CONTROL_PANEL_BUTTON_TEXT_COLOR);
+        controlPanel_highScoreButton.addActionListener(actionListener);
+        skeletonPanel.add(controlPanel_highScoreButton);
+        
         // Set small size in order to have horizontal layout.
         skeletonPanel.setPreferredSize(new Dimension(CONTROL_PANEL_WIDTH,CONTROL_PANEL_HEIGHT));
 
@@ -735,6 +750,18 @@ public class OutputWindow
                 // switch player
                 Jeopardy.changePlayer();
                 updateScore();
+            }
+            else if (source == controlPanel_finishGameButton)
+            {
+                // takes scores, resets everything, and scores.
+                Jeopardy.saveHighScores();
+                Jeopardy.reloadPlayerData();
+                updateScore();
+                reloadJeopardy(answer_count, question_count, category_size);
+            }
+            else if (source == controlPanel_highScoreButton)
+            {
+                
             } // end of if(source == controPanel)
         } // end of method actionPerformed(ActionEvent event)
     } // end of method ControlPanelButtonListener()
