@@ -1,0 +1,8 @@
+#BlueJ class context
+comment0.params=
+comment0.target=InitSplashScreen()
+comment0.text=\r\n\ Creates\ a\ new\ Splash\ screen.\r\n
+comment1.params=
+comment1.target=void\ destroySplashScreen()
+comment1.text=\r\n\ Destroys\ the\ Splash\ screen.\r\n
+numComments=2
