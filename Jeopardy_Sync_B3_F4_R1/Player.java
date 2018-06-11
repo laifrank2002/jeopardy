@@ -48,7 +48,7 @@ public class Player
         // put your code here
         return this.score;
     }
-    
+
     /**
      * Gets the name of the player.
      * 
@@ -59,7 +59,20 @@ public class Player
         // put your code here
         return name;
     } // end of method returnName()
-    
+
+    /**
+     * Sets the name of the player.
+     * 
+     * @param name the new name for the player
+     */
+    public void setName(String name)
+    {
+        if(name != null)
+        {
+            this.name = name;
+        } // end of if(name != null)
+    }    
+
     /**
      * Adds a score to the player.
      * 
@@ -67,10 +80,9 @@ public class Player
      */
     public void addScore(int score)
     {
-        if (score > 0)
-        {
-            this.score = this.score + score;
-        } // end of if (score > 0)
+
+        this.score = this.score + score;
+
     } // end of addScore(int score)
     /**
      * Subtracts a score from the player.
@@ -79,10 +91,9 @@ public class Player
      */
     public void subtractScore(int score)
     {
-        if (score > 0)
-        {
-            this.score = this.score - score;
-        } // end of if (score > 0)
+        
+        this.score = this.score - score;
+        
     } // end of subtractScore(int score)
-    
+
 } // end of class Player

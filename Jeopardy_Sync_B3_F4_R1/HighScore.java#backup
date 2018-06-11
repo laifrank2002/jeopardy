@@ -52,7 +52,7 @@ public class HighScore
     public int getHighScore(int index)
     {
         return this.highScore[index];
-    } // end of method getHighScore(int index)
+    }
 
     /**
      * Records the high score.

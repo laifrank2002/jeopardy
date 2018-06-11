@@ -114,10 +114,8 @@ public class OutputWindow
     private JButton controlPanel_switchPlayerButton;
     private JButton controlPanel_finishGameButton;
     private JButton controlPanel_highScoreButton;
-    
+
     private JPanel jeopardyPanel;
-    //private JPanel jeopardyPanel_categoryPanel;
-    //private JLabel[] jeopardyPanel_label;
     private JPanel jeopardyPanel_questionPanel;
     private JPanel [] jeopardyPanel_questionColumnPanel;
     private JButton[][] jeopardyPanel_button;
@@ -128,6 +126,10 @@ public class OutputWindow
 
     private JPanel titleSplashPanel;
     private JLabel titleSplashPanel_label;
+
+    // Dialogs
+    private HighScoreDialog highScore_dialog;
+    private SettingsDialog settings_dialog;
     // Instance fields.
     private int answer_count;
     private int category_size;
@@ -148,6 +150,10 @@ public class OutputWindow
         category_size = CATEGORY_SIZE;
         createFrame();
         isJeopardyHidden = false;
+
+        // Creates Dialogs
+        highScore_dialog = new HighScoreDialog();
+        settings_dialog = new SettingsDialog();
     } // end of constructor OutputWindow()
 
     /**
@@ -165,6 +171,10 @@ public class OutputWindow
 
         createFrame(questions,categories);
         isJeopardyHidden = false;
+
+        // Creates Dialogs
+        highScore_dialog = new HighScoreDialog();
+        settings_dialog = new SettingsDialog();
     } // end of constructor OutputWindow(int answers, int questions, int categories)
 
     /**
@@ -222,7 +232,7 @@ public class OutputWindow
         frame.repaint();
 
     } // end of method reloadJeopardy(int answers, int questions, int categories, String dataFile)
-
+    
     /**
      * Destroys and reloads the scorepanel without reloading the jeopardy reload being reloaded.
      * 
@@ -230,7 +240,10 @@ public class OutputWindow
      */
     public void reloadScore(int players)
     {
-
+        frame.remove(scoreboardPanel);
+        scoreboardPanel = createScoreboardPanel();
+        frame.add(scoreboardPanel, BorderLayout.WEST);
+        frame.pack();
     } // end of method reloadScore(int players)
 
     /**
@@ -263,7 +276,17 @@ public class OutputWindow
             isJeopardyHidden = true;
         } // end of if(isJeopardyHidden)
     } // end of method switchJeopardy()
-
+    
+    /**
+     * Gets the frame when it is required.
+     * 
+     * @return the JFrame
+     */
+    public JFrame getFrame()
+    {
+        return frame;
+    } // end of getFrame()
+    
     /*
      * Create the frame of the output window.
      */
@@ -272,14 +295,14 @@ public class OutputWindow
         frame = new JFrame(WINDOW_TITLE);
         // Set size.
         frame.setPreferredSize(new Dimension(WINDOW_WIDTH,WINDOW_HEIGHT));
-
+        
         // Center panel.
         centerPanel = createCenterPanel(QUESTION_COUNT,CATEGORY_SIZE);
 
         // Control Panel.
         controlPanel = createControlPanel();
         frame.add(controlPanel,BorderLayout.EAST);
-
+        
         // Score Panel.
         scoreboardPanel = createScoreboardPanel();
         frame.add(scoreboardPanel, BorderLayout.WEST);
@@ -292,9 +315,7 @@ public class OutputWindow
         frame.add(titleSplashPanel,BorderLayout.NORTH);
         // Ensure visibility.
         frame.getContentPane().setBackground(Color.WHITE);
-        /*
-        frame.validate();
-         */
+        
         frame.pack();
         frame.setVisible(true);
 
@@ -566,7 +587,7 @@ public class OutputWindow
         controlPanel_highScoreButton.setForeground(CONTROL_PANEL_BUTTON_TEXT_COLOR);
         controlPanel_highScoreButton.addActionListener(actionListener);
         skeletonPanel.add(controlPanel_highScoreButton);
-        
+
         // Set small size in order to have horizontal layout.
         skeletonPanel.setPreferredSize(new Dimension(CONTROL_PANEL_WIDTH,CONTROL_PANEL_HEIGHT));
 
@@ -738,12 +759,19 @@ public class OutputWindow
                     File file = fileChooser.getSelectedFile();
                     // Reload Jeopardy.
                     Jeopardy.loadNewJeopardy(file);
+                    
+                    int answerCount = settings_dialog.getAnswerCount();
+                    int questionCount = settings_dialog.getQuestionCount();
+                    String fileLocation = file.getAbsolutePath();
+                    FileIO.getData(questionCount, answerCount, fileLocation);
+                    reloadJeopardy(FileIO.getCategoryNumber(), questionCount, answerCount);
                 } // end of if (fileReturned == JFileChooser.APPROVE_OPTION)
 
             }
             else if (source == controlPanel_settingsButton)
             {
-                // dialog popup settings
+                // dialog popup settingss
+                settings_dialog.showDialog();
             }
             else if (source == controlPanel_switchPlayerButton)
             {
@@ -753,15 +781,25 @@ public class OutputWindow
             }
             else if (source == controlPanel_finishGameButton)
             {
-                // takes scores, resets everything, and scores.
-                Jeopardy.saveHighScores();
-                Jeopardy.reloadPlayerData();
-                updateScore();
-                reloadJeopardy(answer_count, question_count, category_size);
+                // Popup to ask user if they are sure.
+                int sure = JOptionPane.showConfirmDialog(frame, "Are you sure you want to finish the game?");
+
+                if (JOptionPane.YES_OPTION == sure)
+                {
+                    // Takes scores, resets everything, and scores.
+                    Jeopardy.saveHighScores();
+                    
+                    highScore_dialog.reloadDialog();
+
+                    Jeopardy.reloadPlayerData();
+                    updateScore();
+
+                    reloadJeopardy(answer_count, question_count, category_size);
+                } // end of if (JOptionPane.YES_OPTION == sure)
             }
             else if (source == controlPanel_highScoreButton)
             {
-                
+                highScore_dialog.showDialog();
             } // end of if(source == controPanel)
         } // end of method actionPerformed(ActionEvent event)
     } // end of method ControlPanelButtonListener()

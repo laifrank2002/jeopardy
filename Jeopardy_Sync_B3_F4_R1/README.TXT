@@ -8,3 +8,6 @@ Player selection of game size.
 Player selection of categories.
 
 AUTOMAKE HIGHSCORE;
+FIX HIGHSCORE;
+
+DO SETTINGS;

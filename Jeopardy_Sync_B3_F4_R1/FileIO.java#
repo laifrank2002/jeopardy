@@ -118,6 +118,7 @@ public class FileIO
      */
     public static void getData(int answerNumber, int questionNumber, String fileLocation)
     {
+
         int counter = 0;
         String fileName = "";
         BufferedReader inputFile = null;

@@ -1,4 +1,5 @@
 import java.io.File;
+import javax.swing.JOptionPane;
 /**
  * Central Logic Unit for Jeopardy. Handles data processing.
  * 
@@ -36,16 +37,20 @@ public class Jeopardy
      */
     public static void main(String[] argument)
     {
-        // Init load data.
+        // Initializes load data.
         fileData = new FileIO();
         score = new HighScore();
-        reloadPlayerData();
+        createPlayerData();
         // Useless window that looks nice.
         InitSplashScreen splashScreen = new InitSplashScreen();
         // Create rendering window.
         window = new OutputWindow();
         // Delete splash window now that everything is loaded.
         splashScreen.destroySplashScreen();
+        
+        // Reload after because the elements needed to have already been created.
+        reloadPlayerData();
+        window.updateScore();
     } // end of method main(String[] argument)
     
     /**
@@ -55,11 +60,12 @@ public class Jeopardy
     {
         player_count = PLAYER_COUNT;
         currentPlayer = 0;
-        player = new Player[player_count];
         for(int playerIndex = 0; playerIndex < player_count; playerIndex++)
         {
-            // Enter name of player dialog option later
-            player[playerIndex] = new Player();
+            // Enter name of player dialog option.
+            String playerName = JOptionPane.showInputDialog(window.getFrame(), "Enter your name player " + (playerIndex+1) + "!");
+            player[playerIndex].setName(playerName);
+            player[playerIndex].subtractScore(player[playerIndex].returnScore());
         } // end of for(int playerIndex = 0; playerIndex < player_count; playerIndex++)
         
     } // end of method resetPlayerData()
@@ -83,7 +89,6 @@ public class Jeopardy
      */
     public static void loadNewJeopardy(File category)
     {
-        FileIO.getData(category);
         int[] data = FileIO.getParameters();
         int answer_count = data[1];
         int question_count = data[2];
@@ -163,4 +168,19 @@ public class Jeopardy
         } // end of (int score, int playerIndex)
         return "NameNotAvailible";
     } // end of getPlayerName(int playerIndex)
+    
+    /*
+     * Create player data.
+     */
+    private static void createPlayerData()
+    {
+        player_count = PLAYER_COUNT;
+        currentPlayer = 0;
+        player = new Player[player_count];
+        for(int playerIndex = 0; playerIndex < player_count; playerIndex++)
+        {
+            // Enter name of player dialog option.
+            player[playerIndex] = new Player();
+        } // end of for(int playerIndex = 0; playerIndex < player_count; playerIndex++)
+    } // end of createPlayerData()
 } // end of class Jeopardy
