@@ -7,7 +7,7 @@ import java.io.FileReader;
 import java.util.Arrays;
 /**
  * Write a description of class FileIO here.
- * 
+ *
  * @author William Wang
  * @version 1.0 2018.05.29
  * @version 1.1 2018.05.30
@@ -31,6 +31,7 @@ public class FileIO
     private static final String DATATYPE = ".data";
 
     // instance fields
+    // arrays
     private static String[][] answers;
     private static String[] categories;
     private static String[] categoryFileNames;
@@ -54,10 +55,15 @@ public class FileIO
         getData();
     } // end of constructor FileIO()
 
+    public FileIO(String fileLocation)
+    {
+        getData(fileLocation);
+    }
+
     /* accesors */
     /**
      * Returns the category count, question count, and answer count in one array.
-     * 
+     *
      * @return the category, question, and answer count.
      */
     public static int[] getParameters()
@@ -75,7 +81,7 @@ public class FileIO
 
     /**
      * Returns this answer.
-     * 
+     *
      * @param categoryNumber the category number; must be non-negative; must be within the subscript of the array;
      * @param answerNumber the answer number; must be non-negative; must be within the subscript of the array;
      * @return this answer.
@@ -87,7 +93,7 @@ public class FileIO
 
     /**
      * Returns this category.
-     * 
+     *
      * @param categoryNumber the category number; must be non-negative; must be within the subscript of the array;
      * @return this category.
      */
@@ -98,7 +104,7 @@ public class FileIO
 
     /**
      * Returns the correct answer.
-     * 
+     *
      * @param categoryNumber the category number; must be non-negative; must be within the subscript of the array;
      * @param answerNumber the answer number; must be non-negative; must be within the subscript of the array;
      * @return the correct answer.
@@ -110,13 +116,13 @@ public class FileIO
 
     /**
      * Imports and stores the data of this game.
-     * 
-     * @param categoryNumber the category number; must be non-negative; 
-     * @param answerNumber the answer number; must be non-negative; 
-     * @param questionNumber the question number; must be non-negative; 
+     *
+     * @param categoryNumber the category number; must be non-negative;
+     * @param answerNumber the answer number; must be non-negative;
+     * @param questionNumber the question number; must be non-negative;
      * @param fileLocation the location of the file;
      */
-    public static void getData(int answerNumber, String fileLocation)
+    public static void getData(String fileLocation)
     {
         int counter = 0;
         BufferedReader inputFile = null;
@@ -125,10 +131,10 @@ public class FileIO
         int questionNumber = 0;
         String filePrefix = "";
         File file;
-        
 
         // Autodetect category number. MUST TO DO
         int categoryNumber = 0;
+        int answerNumber = 0;
         // attempt to establish buffered reader with category file
         if(fileLocation == null)
         {
@@ -139,24 +145,18 @@ public class FileIO
             file = new File(fileLocation);
             filePrefix = file.getParent();
         }
-            
-
         categoryNumber = detectNumberOfCategories(fileLocation);
         counter = 0;
         if(categoryNumber <= 0)
         {
             categoryNumber = CATEGORY_COUNT;
         }
-        if(answerNumber <= 0)
-        {
-            answerNumber = ANSWER_COUNT;
-        }
+
         questionNumber = QUESTION_COUNT;
-        answers = new String[categoryNumber][answerNumber];
+
         categories = new String[categoryNumber];
         categoryFileNames = new String[categoryNumber];
-        correctResponse = new String[categoryNumber][answerNumber];
-        questions = new String[categoryNumber][answerNumber][questionNumber];
+
         lineOfText = "";
         isExit = false;
         do
@@ -195,7 +195,7 @@ public class FileIO
             {
                 isExit = true;
             } // end of else
-            if (isExit)
+            if(isExit)
             {
                 try
                 {
@@ -205,9 +205,18 @@ public class FileIO
                 {
                     System.out.println(exception);
                 } // end of catch(IOException exception)
-            }
+            } // end of if(isExit)
         }
         while(!isExit);
+        // autodetects answer number.
+        answerNumber = detectNumberOfAnswer(categoryFileNames[0]);
+        if(answerNumber <= 0)
+        {
+            answerNumber = ANSWER_COUNT;
+        } // end of if(answerNumber<=0)
+        answers = new String[categoryNumber][answerNumber];
+        correctResponse = new String[categoryNumber][answerNumber];
+        questions = new String[categoryNumber][answerNumber][questionNumber];
         for(int category = 0; category<categoryNumber; category++)
         {
             // reset answer and question count
@@ -254,6 +263,8 @@ public class FileIO
                         answers[category][answerCount] = lineOfText;
                         // reset question count to 0
                         questionCount = 0;
+                        // increment answer count.
+                        
                     } // end of if(LineOfText.contains(ANSWER_MARKER))
                     else if(lineOfText.contains(QUESTION_MARKER))
                     {
@@ -286,7 +297,7 @@ public class FileIO
 
     /**
      * Returns a string representation of this component.
-     * 
+     *
      * @param categoryNumber the category number; must be non-negative; must be within the subscript of the array;
      * @param answerNumber the category number; must be non-negative; must be within the subscript of the array;
      * @return a string representation of this component.
@@ -315,7 +326,7 @@ public class FileIO
 
     /**
      * Returns this question.
-     * 
+     *
      * @param categoryNumber the category number; must be non-negative; must be within the subscript of the array;
      * @param answerNumber the answer number; must be non-negative; must be within the subscript of the array;
      * @param questionNumber the question number;
@@ -328,7 +339,7 @@ public class FileIO
 
     /**
      * Returns a string representation of this component.
-     * 
+     *
      * @return a string representing this component
      */
     public String toString()
@@ -336,8 +347,8 @@ public class FileIO
         return
         getClass().getName()
         + "["
-        + "Categories: "  
-        + ", answers: "  
+        + "Categories: "
+        + ", answers: "
         + "]";
     } // end of method toString()
 
@@ -402,7 +413,7 @@ public class FileIO
 
         // get answers, questions and correct responses
 
-        for(int category = 0; category<CATEGORY_COUNT; category++)
+        for(int category = 0; category < CATEGORY_COUNT; category++)
         {
             // reset answer and question count
             int answerCount = 0;
@@ -484,6 +495,7 @@ public class FileIO
         BufferedReader inputFile = null;
         boolean isExit = false;
         String lineOfText = "";
+        // establishes connection to the specified file.
         do
         {
             try
@@ -492,7 +504,7 @@ public class FileIO
             } // end of try
             catch(IOException exception)
             {
-                System.out.println(exception);
+
             } // end of catch(IOException exception)
         }
         while(inputFile == null);
@@ -500,6 +512,7 @@ public class FileIO
         {
             try
             {
+                // read the next line of text
                 lineOfText = inputFile.readLine();
             } // end of try
             catch(IOException exception)
@@ -508,6 +521,7 @@ public class FileIO
             } // end of catch(IOException exception)
             if(lineOfText != null)
             {
+                // increment category counter if the line is not null
                 counter = counter + 1;
             } // end of if(lineOfText != null)
             else
@@ -518,16 +532,78 @@ public class FileIO
             {
                 try
                 {
+                    // terminates connection once there are no more lines to read.
                     inputFile.close();
                 } // end of try
                 catch(IOException exception)
                 {
-                    System.out.println(exception);
+
                 } // end of catch(IOException exception)
-            }
+            } // end of if(isExit)
         }
         while(!isExit);
+        // return the number of categories counted
         return counter;
     }
 
+    public static int detectNumberOfAnswer(String fileLocation)
+    {
+        int counter = 0;
+        BufferedReader inputFile = null;
+        boolean isExit = false;
+        String lineOfText = "";
+        // establishes connection to the specified file.
+        do
+        {
+            try
+            {
+                inputFile = new BufferedReader (new FileReader(fileLocation));
+            } // end of try
+            catch(IOException exception)
+            {
+
+            } // end of catch(IOException exception)
+        }
+        while(inputFile == null);
+        do
+        {
+            try
+            {
+                // read the next line of text
+                lineOfText = inputFile.readLine();
+            } // end of try
+            catch(IOException exception)
+            {
+                System.out.println(exception);
+            } // end of catch(IOException exception)
+            if(lineOfText != null)
+            {
+                // determines whether the line of text is an answers
+                if(lineOfText.contains(ANSWER_MARKER)&&!lineOfText.contains(QUESTION_MARKER))
+                {
+                    // increments answer counter if the line is answer.
+                    counter = counter + 1;
+                }
+            } // end of if(lineOfText != null)
+            else
+            {
+                isExit = true;
+            } // end of else
+            if (isExit)
+            {
+                try
+                {
+                    // terminates connection once there are no more lines to read.
+                    inputFile.close();
+                } // end of try
+                catch(IOException exception)
+                {
+
+                } // end of catch(IOException exception)
+            } // end of if(isExit)
+        }
+        while(!isExit);
+        // return the number of answers counted
+        return counter;
+    }
 } // end of class FileIO
