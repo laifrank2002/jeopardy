@@ -6,7 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.Arrays;
 /**
- * Write a description of class FileIO here.
+ * Reads and stores game data.
  *
  * @author William Wang
  * @version 1.0 2018.05.29
@@ -15,6 +15,7 @@ import java.util.Arrays;
  * @version 2.0 2018.06.01
  * @version 2.1 2018.06.02
  * @version 2.2 2018.06.03
+ * @version 3.0 2018.06.12
  */
 public class FileIO
 {
@@ -23,7 +24,7 @@ public class FileIO
     private static final int QUESTION_COUNT = 5;
     private static final int ANSWER_COUNT = 6;
     private static final String categoryFileName = "Data/categories.data";
-    private static final String fileLocationPrefix = "Data/";
+    private static final String categoryFileLocationPrefix = "Data/";
     private static final String MARKER_PREFIX = "\\";
     private static final String CORRECT_MARKER = "*";
     private static final String QUESTION_MARKER = "?";
@@ -45,7 +46,7 @@ public class FileIO
     /* constructors */
 
     /**
-     * Creates a jeopardy game.
+     * Reads and stores data from the default game files.
      */
     public FileIO()
     {
@@ -55,9 +56,9 @@ public class FileIO
         getData();
     } // end of constructor FileIO()
 
-    public FileIO(String fileLocation)
+    public FileIO(String categoryFileLocation)
     {
-        getData(fileLocation);
+        getData(categoryFileLocation);
     }
 
     /* accesors */
@@ -120,9 +121,9 @@ public class FileIO
      * @param categoryNumber the category number; must be non-negative;
      * @param answerNumber the answer number; must be non-negative;
      * @param questionNumber the question number; must be non-negative;
-     * @param fileLocation the location of the file;
+     * @param categoryFileLocation the location of the file;
      */
-    public static void getData(String fileLocation)
+    public static void getData(String categoryFileLocation)
     {
         int counter = 0;
         BufferedReader inputFile = null;
@@ -136,34 +137,33 @@ public class FileIO
         int categoryNumber = 0;
         int answerNumber = 0;
         // attempt to establish buffered reader with category file
-        if(fileLocation == null)
+        if(categoryFileLocation == null)
         {
-            fileLocation = categoryFileName;
+            categoryFileLocation = categoryFileName;
         }
         else
         {
-            file = new File(fileLocation);
+            file = new File(categoryFileLocation);
             filePrefix = file.getParent();
         }
-        categoryNumber = detectNumberOfCategories(fileLocation);
+        categoryNumber = detectNumberOfCategories(categoryFileLocation);
         counter = 0;
         if(categoryNumber <= 0)
         {
             categoryNumber = CATEGORY_COUNT;
-        }
-
+        } // end of if(categoryNumber<=0)
+        // initialise question number.
         questionNumber = QUESTION_COUNT;
-
+        // initialise arrays with the detected category number.
         categories = new String[categoryNumber];
         categoryFileNames = new String[categoryNumber];
-
-        lineOfText = "";
+        // reset conditions.
         isExit = false;
         do
         {
             try
             {
-                inputFile = new BufferedReader (new FileReader(fileLocation));
+                inputFile = new BufferedReader (new FileReader(categoryFileLocation));
             } // end of try
             catch(IOException exception)
             {
@@ -214,12 +214,13 @@ public class FileIO
         {
             answerNumber = ANSWER_COUNT;
         } // end of if(answerNumber<=0)
+        // initialises arrays with detected category and answer count.
         answers = new String[categoryNumber][answerNumber];
         correctResponse = new String[categoryNumber][answerNumber];
         questions = new String[categoryNumber][answerNumber][questionNumber];
         for(int category = 0; category<categoryNumber; category++)
         {
-            // reset answer and question count
+            // resets answer and question count
             int answerCount = 0;
             int questionCount = 0;
             // reset exit condition
@@ -252,6 +253,7 @@ public class FileIO
                     // determine whether line of text is question or answer
                     if (isFirstTime)
                     {
+                        // stores the answer in the array
                         answers[category][answerCount] = lineOfText;
                         // do not increment answer count if it is the first time reading an answer
                         isFirstTime = false;
@@ -264,7 +266,7 @@ public class FileIO
                         // reset question count to 0
                         questionCount = 0;
                         // increment answer count.
-                        
+
                     } // end of if(LineOfText.contains(ANSWER_MARKER))
                     else if(lineOfText.contains(QUESTION_MARKER))
                     {
@@ -292,8 +294,8 @@ public class FileIO
                 } // end of else
             }
             while(!isExit);
-        }
-    }
+        } // end of for(int category = 0; category<categoryNumber; category++)
+    } // end of getData()
 
     /**
      * Returns a string representation of this component.
@@ -401,7 +403,7 @@ public class FileIO
                 // convert category to filename http://touque.ca/EC/programming/Java/assignments/ca/Jeopardy/images/5x5_answer.png
                 fileName = categories[counter].toLowerCase()+ DATATYPE;
                 // insert file name into array
-                categoryFileNames[counter] = fileLocationPrefix + fileName;
+                categoryFileNames[counter] = categoryFileLocationPrefix + fileName;
                 counter = counter + 1;
             } // end of if(lineOfText != null)
             else
@@ -489,7 +491,7 @@ public class FileIO
         } // end of for(int category = 0; category<CATEGORY_COUNT; category++)
     } // end of method getData
 
-    private static int detectNumberOfCategories(String fileLocation)
+    private static int detectNumberOfCategories(String categoryFileLocation)
     {
         int counter = 0;
         BufferedReader inputFile = null;
@@ -500,7 +502,7 @@ public class FileIO
         {
             try
             {
-                inputFile = new BufferedReader (new FileReader(fileLocation));
+                inputFile = new BufferedReader (new FileReader(categoryFileLocation));
             } // end of try
             catch(IOException exception)
             {
@@ -544,9 +546,9 @@ public class FileIO
         while(!isExit);
         // return the number of categories counted
         return counter;
-    }
+    } // end of method detectNumberOfCategories(String categoryFileLocation)
 
-    public static int detectNumberOfAnswer(String fileLocation)
+    public static int detectNumberOfAnswer(String categoryFileLocation)
     {
         int counter = 0;
         BufferedReader inputFile = null;
@@ -557,7 +559,7 @@ public class FileIO
         {
             try
             {
-                inputFile = new BufferedReader (new FileReader(fileLocation));
+                inputFile = new BufferedReader (new FileReader(categoryFileLocation));
             } // end of try
             catch(IOException exception)
             {
@@ -605,5 +607,5 @@ public class FileIO
         while(!isExit);
         // return the number of answers counted
         return counter;
-    }
+    } // end of method detectNumberOfAnswer(String categoryFileLocation)
 } // end of class FileIO
