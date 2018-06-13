@@ -1,0 +1,25 @@
+#BlueJ class context
+comment0.target=Player
+comment0.text=\r\n\ A\ data\ representation\ of\ a\ player.\r\n\ \r\n\ @author\ William\ Wang\r\n\ @version\ 2018-06-06\r\n
+comment1.params=
+comment1.target=Player()
+comment1.text=\r\n\ Creates\ a\ default\ player.\r\n
+comment2.params=name
+comment2.target=Player(java.lang.String)
+comment2.text=\r\n\ Creates\ a\ player\ with\ a\ name.\r\n\ \r\n\ @param\ name\ the\ name\ of\ the\ player\r\n
+comment3.params=
+comment3.target=int\ returnScore()
+comment3.text=\r\n\ Gets\ the\ score\ of\ the\ player.\r\n\ \r\n\ @return\ the\ score\ of\ the\ player\r\n
+comment4.params=
+comment4.target=java.lang.String\ returnName()
+comment4.text=\r\n\ Gets\ the\ name\ of\ the\ player.\r\n\ \r\n\ @return\ the\ name\ of\ the\ player\r\n
+comment5.params=name
+comment5.target=void\ setName(java.lang.String)
+comment5.text=\r\n\ Sets\ the\ name\ of\ the\ player.\r\n\ \r\n\ @param\ name\ the\ new\ name\ for\ the\ player\r\n
+comment6.params=score
+comment6.target=void\ addScore(int)
+comment6.text=\r\n\ Adds\ a\ score\ to\ the\ player.\r\n\ \r\n\ @param\ score\ the\ amount\ to\ add\ to\r\n
+comment7.params=score
+comment7.target=void\ subtractScore(int)
+comment7.text=\r\n\ Subtracts\ a\ score\ from\ the\ player.\r\n\ \r\n\ @param\ score\ the\ amount\ of\ take\ from\r\n
+numComments=8

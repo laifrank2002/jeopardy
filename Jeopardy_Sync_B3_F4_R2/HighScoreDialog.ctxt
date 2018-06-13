@@ -1,0 +1,25 @@
+#BlueJ class context
+comment0.target=HighScoreDialog
+comment0.text=\r\n\ Displays\ the\ highscores.\r\n\r\n\ @author\ Frank\ Lai\r\n\ @version\ 2018-06-08\r\n
+comment1.params=
+comment1.target=HighScoreDialog()
+comment1.text=\r\n\ Creates\ a\ new\ highscore\ JDialog.\r\n
+comment2.params=event
+comment2.target=void\ actionPerformed(java.awt.event.ActionEvent)
+comment2.text=\r\n\ Responds\ to\ quit\ button.\r\n
+comment3.params=
+comment3.target=void\ setInvisible()
+comment3.text=\r\n\ Hides\ the\ dialog.\r\n
+comment4.params=
+comment4.target=void\ showDialog()
+comment4.text=\r\n\ Revisibilizes\ the\ dialog.\r\n
+comment5.params=
+comment5.target=void\ reloadDialog()
+comment5.text=\r\n\ Shows\ the\ dialog\ and\ reloads\ all\ data\ again.\r\n
+comment6.params=
+comment6.target=javax.swing.JPanel\ createMainPanel()
+comment6.text=\r\n\ Creates\ the\ main\ panel.\r\n
+comment7.params=
+comment7.target=javax.swing.JPanel\ createButtonPanel()
+comment7.text=\r\n\ Creates\ the\ button\ panel.\r\n
+numComments=8
