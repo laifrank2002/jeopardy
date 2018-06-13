@@ -131,7 +131,6 @@ public class FileIO
         String lineOfText = "";
         int questionNumber = 0;
         String filePrefix = "";
-        File file;
 
         // Autodetect category number. MUST TO DO
         int categoryNumber = 0;
@@ -143,9 +142,11 @@ public class FileIO
         }
         else
         {
-            file = new File(categoryFileLocation);
+            // get path of folder of game data.
+            File file = new File(categoryFileLocation);
             filePrefix = file.getParent();
         }
+        // detect number of categories.
         categoryNumber = detectNumberOfCategories(categoryFileLocation);
         counter = 0;
         if(categoryNumber <= 0)
@@ -189,6 +190,7 @@ public class FileIO
                 String fileName = categories[counter].toLowerCase()+ DATATYPE;
                 // insert file name into array
                 categoryFileNames[counter] = filePrefix + MARKER_PREFIX + fileName;
+                // increment counter.
                 counter = counter + 1;
             } // end of if(lineOfText != null)
             else
@@ -314,15 +316,17 @@ public class FileIO
         {
             if(index == QUESTION_COUNT-1)
             {
+                // add final question to the question string without comma.
                 question = question + questions[categoryNumber][answerNumber][index];
             }
             else
             {
+                // add next question to the question string with punctuation.
                 question = question + questions[categoryNumber][answerNumber][index] + ", ";
             }
         }
+        // info gets the strings category, answer and question all together.
         info = category + answer + question;
-        System.out.println(info);
         return info;
     } // end of method getInfo(int categoryNumber, int answerNumber)
 
@@ -351,6 +355,7 @@ public class FileIO
         + "["
         + "Categories: "
         + ", answers: "
+        + ", questions: "
         + "]";
     } // end of method toString()
 
@@ -374,121 +379,14 @@ public class FileIO
         questions = new String[CATEGORY_COUNT][ANSWER_COUNT][QUESTION_COUNT];
 
         // attempt to establish buffered reader with category file
-        do
-        {
-            try
-            {
-                inputFile = new BufferedReader (new FileReader(categoryFileName));
-            } // end of try
-            catch(IOException exception)
-            {
-                System.out.println(exception);
-            } // end of catch(IOException exception)
-        }
-        while(inputFile == null);
-        do
-        {
-            try
-            {
-                lineOfText = inputFile.readLine();
-            } // end of try
-            catch(IOException exception)
-            {
-                System.out.println(exception);
-            } // end of catch(IOException exception)
-            if(lineOfText != null)
-            {
-                // insert category into array
-                categories[counter] = lineOfText;
-                // convert category to filename http://touque.ca/EC/programming/Java/assignments/ca/Jeopardy/images/5x5_answer.png
-                fileName = categories[counter].toLowerCase()+ DATATYPE;
-                // insert file name into array
-                categoryFileNames[counter] = categoryFileLocationPrefix + fileName;
-                counter = counter + 1;
-            } // end of if(lineOfText != null)
-            else
-            {
-                isExit = true;
-            } // end of else
-        }
-        while(!isExit);
+        getCategories(categoryFileName);
 
         // get answers, questions and correct responses
+        getQuestions();
+        
 
-        for(int category = 0; category < CATEGORY_COUNT; category++)
-        {
-            // reset answer and question count
-            int answerCount = 0;
-            int questionCount = 0;
-            // reset exit condition
-            isExit = false;
-            do
-            {
-                try
-                {
-                    inputFile = new BufferedReader (new FileReader(categoryFileNames[category]));
-                } // end of try
-                catch(IOException exception)
-                {
-                    System.out.println(exception);
-                } // end of catch(IOException exception)
-            }
-            while(inputFile == null);
-            do
-            {
-                try
-                {
-                    lineOfText = inputFile.readLine();
-                } // end of try
-                catch(IOException exception)
-                {
-                    System.out.println(exception);
-                } // end of catch(IOException exception)
-                if(lineOfText!=null)
-                {
-                    // determine whether line of text is question or answer
-                    if(questionCount == 5)
-                    {
-                        if(answerCount == 0 && questionCount == 0)
-                        {
-                            // do not increment answer count if it is the first time reading an answer
-                        } // end of if(answerCount == 0 && questionCount == 0)
-                        else
-                        {
-                            answerCount = answerCount + 1;
-                        } // end of else
-                        // insert answer into array
-                        answers[category][answerCount] = lineOfText;
-                        // reset question count to 0
-                        questionCount = 0;
-                    } // end of if(LineOfText.contains(ANSWER_MARKER))
-                    else if(lineOfText.contains(QUESTION_MARKER))
-                    {
-                        if(lineOfText.contains(CORRECT_MARKER))
-                        {
-                            String[] solution = new String[2];
-                            // split string to exclude "*"
-                            solution = lineOfText.split(MARKER_PREFIX + CORRECT_MARKER);
-                            // insert question without "*" into both arrays
-                            questions[category][answerCount][questionCount] = solution[0];
-                            correctResponse[category][answerCount] = solution[0];
-                            questionCount = questionCount + 1;
-                        } // end of if(lineOfText.contains(CORRECT_MARKER))
-                        else
-                        {
-                            // insert question into array
-                            questions[category][answerCount][questionCount] = lineOfText;
-                            questionCount = questionCount + 1;
-                        } // end of else
-                    } // end of else if(lineOfText.contains(QUESTION_MARKER))
-                } // end of if(lineOfText!=null)
-                else
-                {
-                    isExit = true;
-                } // end of else
-            }
-            while(!isExit);
-        } // end of for(int category = 0; category<CATEGORY_COUNT; category++)
+
+
     } // end of method getData
 
     private static int detectNumberOfCategories(String categoryFileLocation)
@@ -608,4 +506,132 @@ public class FileIO
         // return the number of answers counted
         return counter;
     } // end of method detectNumberOfAnswer(String categoryFileLocation)
+
+    private static void getCategories(String categoryFileName)
+    {
+        int counter = 0;
+        BufferedReader inputFile = null;
+        boolean isExit = false;
+        String lineOfText = "";
+        do
+        {
+            try
+            {
+                inputFile = new BufferedReader (new FileReader(categoryFileName));
+            } // end of try
+            catch(IOException exception)
+            {
+                System.out.println(exception);
+            } // end of catch(IOException exception)
+        }
+        while(inputFile == null);
+        do
+        {
+            try
+            {
+                lineOfText = inputFile.readLine();
+            } // end of try
+            catch(IOException exception)
+            {
+                System.out.println(exception);
+            } // end of catch(IOException exception)
+            if(lineOfText != null)
+            {
+                // insert category into array
+                categories[counter] = lineOfText;
+                // convert category to filename http://touque.ca/EC/programming/Java/assignments/ca/Jeopardy/images/5x5_answer.png
+                String fileName = categories[counter].toLowerCase()+ DATATYPE;
+                // insert file name into array
+                categoryFileNames[counter] = categoryFileLocationPrefix + fileName;
+                counter = counter + 1;
+            } // end of if(lineOfText != null)
+            else
+            {
+                isExit = true;
+            } // end of else
+        }
+        while(!isExit);
+    }
+    
+    private static void getQuestions()
+    {
+      int counter = 0;
+      BufferedReader inputFile = null;
+      boolean isExit = false;
+      String lineOfText = "";
+      for(int category = 0; category < CATEGORY_COUNT; category++)
+      {
+        // reset answer and question count
+        int answerCount = 0;
+        int questionCount = 0;
+        // reset exit condition
+        isExit = false;
+        do
+        {
+            try
+            {
+                inputFile = new BufferedReader (new FileReader(categoryFileNames[category]));
+            } // end of try
+            catch(IOException exception)
+            {
+                System.out.println(exception);
+            } // end of catch(IOException exception)
+        }
+        while(inputFile == null);
+        do
+        {
+            try
+            {
+                lineOfText = inputFile.readLine();
+            } // end of try
+            catch(IOException exception)
+            {
+                System.out.println(exception);
+            } // end of catch(IOException exception)
+            if(lineOfText!=null)
+            {
+                // determine whether line of text is question or answer
+                if(questionCount == 5)
+                {
+                    if(answerCount == 0 && questionCount == 0)
+                    {
+                        // do not increment answer count if it is the first time reading an answer
+                    } // end of if(answerCount == 0 && questionCount == 0)
+                    else
+                    {
+                        answerCount = answerCount + 1;
+                    } // end of else
+                    // insert answer into array
+                    answers[category][answerCount] = lineOfText;
+                    // reset question count to 0
+                    questionCount = 0;
+                } // end of if(LineOfText.contains(ANSWER_MARKER))
+                else if(lineOfText.contains(QUESTION_MARKER))
+                {
+                    if(lineOfText.contains(CORRECT_MARKER))
+                    {
+                        String[] solution = new String[2];
+                        // split string to exclude "*"
+                        solution = lineOfText.split(MARKER_PREFIX + CORRECT_MARKER);
+                        // insert question without "*" into both arrays
+                        questions[category][answerCount][questionCount] = solution[0];
+                        correctResponse[category][answerCount] = solution[0];
+                        questionCount = questionCount + 1;
+                    } // end of if(lineOfText.contains(CORRECT_MARKER))
+                    else
+                    {
+                        // insert question into array
+                        questions[category][answerCount][questionCount] = lineOfText;
+                        questionCount = questionCount + 1;
+                    } // end of else
+                } // end of else if(lineOfText.contains(QUESTION_MARKER))
+            } // end of if(lineOfText!=null)
+            else
+            {
+                isExit = true;
+            } // end of else
+        }
+        while(!isExit);
+      }
+    }
 } // end of class FileIO
