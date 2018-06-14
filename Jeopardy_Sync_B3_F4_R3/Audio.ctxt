@@ -1,0 +1,12 @@
+#BlueJ class context
+comment0.params=
+comment0.target=Audio()
+comment1.params=
+comment1.target=void\ playTheme()
+comment2.params=
+comment2.target=void\ stopTheme()
+comment3.params=
+comment3.target=void\ pauseTheme()
+comment4.params=soundVolume
+comment4.target=void\ setVolume(int)
+numComments=5

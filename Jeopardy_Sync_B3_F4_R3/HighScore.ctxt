@@ -1,0 +1,19 @@
+#BlueJ class context
+comment0.target=HighScore
+comment0.text=\r\n\ Records\ the\ 10\ highest\ scores.\r\n\ \r\n\ @author\ William\ Wang\r\n\ @version\ 1.0\ 2018.06.07\r\n
+comment1.params=
+comment1.target=HighScore()
+comment1.text=\r\n\ Constructor\ for\ objects\ of\ class\ HighScore\r\n
+comment2.params=index
+comment2.target=java.lang.String\ getName(int)
+comment2.text=\r\n\ Returns\ this\ name.\r\n\ \r\n\ @return\ \ \ \ \ the\ name.\r\n
+comment3.params=index
+comment3.target=int\ getHighScore(int)
+comment3.text=\r\n\ Returns\ this\ high\ score.\r\n\ \r\n\ @return\ the\ high\ score.\r\n
+comment4.params=name\ highScore
+comment4.target=void\ recordHighScore(java.lang.String,\ int)
+comment4.text=\r\n\ Records\ the\ high\ score.\r\n\ \r\n\ @param\ name\ the\ name\ of\ the\ player;\ must\ not\ be\ <code>null</code>.\r\n\ @param\ highScore\ the\ score\ of\ the\ player;\ must\ be\ non-negative.\r\n
+comment5.params=
+comment5.target=void\ getData()
+comment5.text=\r\n\ Gets\ the\ highscores\ contained\ in\ file.\r\n\ \r\n\ @param\ \ y\ \ \ a\ sample\ parameter\ for\ a\ method\r\n\ @return\ \ \ \ \ the\ sum\ of\ x\ and\ y\ \r\n
+numComments=6
